@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "t5008_converter"
+
+def help_text
+  <<~HELP
+    Usage: t5008converter <input_csv> <output_csv>
+           t5008converter --generate-template <output_template_csv>
+  HELP
+end
+
+abort(help_text) unless ARGV.count == 2
+
+if ARGV[0] == "--generate-template"
+  T5008Converter.generate_template(ARGV[1])
+else
+  T5008Converter.fill_csv(ARGV[0], ARGV[1])
+end
